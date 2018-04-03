@@ -1,4 +1,4 @@
-import pyspeedtest
+import pyspeedtest, time
 from datetime import datetime
 
 st = pyspeedtest.SpeedTest()
@@ -6,20 +6,20 @@ st = pyspeedtest.SpeedTest()
 
 def get_speeds():
   speeds = { 
-    "up": str(st.upload() / 1000000),
-    "down": str(st.download() / 1000000),
+    "up": str(round(st.upload() / 1000000, 2)),
+    "down": str(round(st.download() / 1000000, 2)),
   }  
   return speeds
 
 def log_speeds(speeds):
   with open("logs.txt", "a+") as f:
-    f.write("At " + str(datetime.now()) + " I got  " + speeds['down'] + " mbs down and " + speeds['up'] + " mbs up.")
+    f.write(str(datetime.now()) + ", " + speeds['down'] + ", " + speeds['up'] + "\n")
 
-
-
-
-
-speeds = get_speeds()
-log_speeds(speeds)
-
+while True:
+  print("Testing...")
+  speeds = get_speeds()
+  print("Logging...")
+  log_speeds(speeds)
+  print("Sleeping...")
+  time.sleep(3600)
 

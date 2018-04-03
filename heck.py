@@ -3,7 +3,6 @@ from datetime import datetime
 
 st = pyspeedtest.SpeedTest()
 
-
 def get_speeds():
   speeds = { 
     "up": str(round(st.upload() / 1000000, 2)),
@@ -22,4 +21,3 @@ while True:
   log_speeds(speeds)
   print("Sleeping...")
   time.sleep(3600)
-

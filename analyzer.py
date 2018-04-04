@@ -1,13 +1,21 @@
+from decimal import Decimal
+
+dec = Decimal
+
 f = open("logs.txt")
 
 logs = f.readlines()
 
 def convert_speeds_to_floats(logs):
+  speeds = []
   for line in logs:
     line = line.split(", ")
-    line[2] = float(line[2].rstrip())
+    print(line)
     line[1] = float(line[1])
-  return logs
+    line[2] = float(line[2].rstrip())
+    print(line)
+    speeds.append(line)
+  return speeds
 
 def get_average_speeds(data):
   down_total = 0.0
@@ -15,9 +23,10 @@ def get_average_speeds(data):
   for line in data:
     down_total += line[1]
     up_total +=  line[2]
-  averages = {'down': down_total / data.length, 'up': up_total / data.length }
+  averages = {'down': down_total / len(data), 'up': up_total / len(data)}
   return averages
 
 speeds = convert_speeds_to_floats(logs)
-averages = get_average_speeds(speeds)
-print(averages)
+print(speeds)
+# averages = get_average_speeds(speeds)
+# print(averages)
